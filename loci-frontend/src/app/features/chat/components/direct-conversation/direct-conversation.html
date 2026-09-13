@@ -15,7 +15,7 @@
 -->
 
 <main id="main-content" class="flex h-[calc(100vh-4rem)]">
-  <section id="chat-conversation" class="flex-1 bg-white flex flex-col">
+  <section id="chat-conversation" class="flex-1 bg-white dark:bg-gray-800 flex flex-col">
 
 
     <app-chat-header [chat]="chatInfo()" [showBackButton]="true" [features]="singleChatFeatures" (back)="onBack()"
@@ -32,7 +32,7 @@
 
       @if (state.loading()) {
       <div class="flex justify-center py-4">
-        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-neutral-500"></div>
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-neutral-500 dark:border-gray-400"></div>
       </div>
       }
 

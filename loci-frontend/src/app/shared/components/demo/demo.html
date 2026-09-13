@@ -18,7 +18,7 @@
 <div>
   Messageing sending place
   <div id="messages" class="p-10">
-    <button class="btn btn-primary p-2 bg-neutral-200" (click)="onSendMessage()">Send Test Message</button>
+    <button class="btn btn-primary p-2 bg-neutral-200 dark:bg-gray-600" (click)="onSendMessage()">Send Test Message</button>
     <h2>Received messages</h2>
     <ol>
       @for(message of receivesMessage(); track message){
@@ -33,10 +33,10 @@
 <div>
   <h1>Presence testing place</h1>
   <div>
-    <button (click)="onHeartbeat()" class="bg-neutral-200 p-3 m-2" type="button">Set online/Heatbeat</button>
+    <button (click)="onHeartbeat()" class="bg-neutral-200 dark:bg-gray-600 p-3 m-2" type="button">Set online/Heatbeat</button>
   </div>
   <div>
-    <button (click)="onOffline()" class="bg-neutral-200 p-3 m-2" type="button">Emplicit offline (Fake logout)</button>
+    <button (click)="onOffline()" class="bg-neutral-200 dark:bg-gray-600 p-3 m-2" type="button">Emplicit offline (Fake logout)</button>
   </div>
 
   <div>

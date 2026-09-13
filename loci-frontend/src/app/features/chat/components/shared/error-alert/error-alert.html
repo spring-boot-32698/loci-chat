@@ -16,24 +16,24 @@
 
 @if (error(); as err) {
 <div class="p-4 m-4 border rounded-lg flex items-start gap-3 animate-in fade-in slide-in-from-top-2"
-  [class.bg-red-50]="isValidationError()" [class.border-red-200]="isValidationError()"
-  [class.bg-neutral-50]="!isValidationError()" [class.border-neutral-200]="!isValidationError()">
+  [class.bg-red-50]="isValidationError()" [class.dark:bg-red-950]="isValidationError()" [class.border-red-200]="isValidationError()" [class.dark:border-red-800]="isValidationError()"
+  [class.bg-neutral-50]="!isValidationError()" [class.dark:bg-gray-900]="!isValidationError()" [class.border-neutral-200]="!isValidationError()" [class.dark:border-gray-700]="!isValidationError()">
 
   <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-    [class.bg-red-100]="isValidationError()" [class.bg-neutral-100]="!isValidationError()">
+    [class.bg-red-100]="isValidationError()" [class.dark:bg-red-950]="isValidationError()" [class.bg-neutral-100]="!isValidationError()" [class.dark:bg-gray-700]="!isValidationError()">
     <i class="fa-solid fa-exclamation-triangle" [class.text-red-600]="isValidationError()"
-      [class.text-neutral-600]="!isValidationError()">
+      [class.text-neutral-600]="!isValidationError()" [class.dark:text-gray-400]="!isValidationError()">
     </i>
   </div>
 
   <div class="flex-1 min-w-0">
-    <h4 class="text-sm font-medium text-gray-900">{{ err.message }}</h4>
+    <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100">{{ err.message }}</h4>
     @if (err.description) {
-    <p class="text-xs text-neutral-600 mt-1">{{ err.description }}</p>
+    <p class="text-xs text-neutral-600 dark:text-gray-400 mt-1">{{ err.description }}</p>
     }
   </div>
 
-  <button class="text-neutral-400 hover:text-neutral-600 p-1 rounded hover:bg-neutral-100 transition-colors"
+  <button class="text-neutral-400 dark:text-gray-500 hover:text-neutral-600 p-1 rounded hover:bg-neutral-100 dark:hover:bg-gray-700 transition-colors"
     (click)="dismiss.emit()" aria-label="Dismiss error">
     <i class="fa-solid fa-times"></i>
   </button>

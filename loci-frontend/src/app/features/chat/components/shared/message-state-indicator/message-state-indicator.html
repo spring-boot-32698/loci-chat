@@ -17,16 +17,16 @@
 @switch (messageState()) {
 
 @case ('created') {
-<i class="w-3 h-3 rounded-full border-2 border-neutral-400 border-t-transparent animate-spin"></i>
+<i class="w-3 h-3 rounded-full border-2 border-neutral-400 dark:border-gray-500 border-t-transparent animate-spin"></i>
 }
 @case ('prepare') {
-<i class="w-3 h-3 rounded-full border-2 border-neutral-400 border-t-transparent animate-spin"></i>
+<i class="w-3 h-3 rounded-full border-2 border-neutral-400 dark:border-gray-500 border-t-transparent animate-spin"></i>
 }
 @case ('sent') {
-<i class="fa-solid fa-check text-xs text-neutral-400"></i>
+<i class="fa-solid fa-check text-xs text-neutral-400 dark:text-gray-500"></i>
 }
 @case ('delivered') {
-<i class="fa-solid fa-check-double text-xs text-neutral-400"></i>
+<i class="fa-solid fa-check-double text-xs text-neutral-400 dark:text-gray-500"></i>
 }
 @case ('seen') {
 <i class="fa-solid fa-check-double text-xs text-blue-500"></i>

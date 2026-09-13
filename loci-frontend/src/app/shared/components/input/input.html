@@ -28,14 +28,14 @@
     [attr.aria-describedby]="maxLength() ? counterId : null"
     [attr.aria-invalid]="error()"
     #textareaElement
-    class="w-full border border-neutral-300 rounded-lg px-4 py-2 focus:border-accent focus:ring-2 focus:ring-accent/20 resize-none disabled:bg-neutral-100 disabled:cursor-not-allowed"
+    class="w-full border border-neutral-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:border-accent focus:ring-2 focus:ring-accent/20 resize-none disabled:bg-neutral-100 disabled:cursor-not-allowed"
     [class.border-error]="error()"
     [class.text-error]="error()"
   ></textarea>
 } @else {
   <div class="relative">
     @if (type() === 'search') {
-      <lucide-icon name="search" size="20" class="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500"></lucide-icon>
+      <lucide-icon name="search" size="20" class="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 dark:text-gray-400"></lucide-icon>
     }
     <input
       [id]="uniqueId"
@@ -50,7 +50,7 @@
       [attr.aria-describedby]="maxLength() ? counterId : null"
       [attr.aria-invalid]="error()"
       #inputElement
-      class="w-full border border-neutral-300 rounded-lg px-4 py-2 focus:border-accent focus:ring-2 focus:ring-accent/20 disabled:bg-neutral-100 disabled:cursor-not-allowed"
+      class="w-full border border-neutral-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:border-accent focus:ring-2 focus:ring-accent/20 disabled:bg-neutral-100 disabled:cursor-not-allowed"
       [class.pl-15]="type() === 'search'"
       [class.pr-10]="type() === 'search' && value() !== ''"
       [class.border-error]="error()"
@@ -60,7 +60,7 @@
       <button
         type="button"
         (click)="clear()"
-        class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 focus:outline-none"
+        class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 dark:text-gray-400 hover:text-neutral-700 dark:hover:text-gray-200 focus:outline-none"
         aria-label="Clear input"
       >
         <lucide-icon name="x" size="20"></lucide-icon>
@@ -69,5 +69,5 @@
   </div>
 }
 @if (maxLength()) {
-  <span [id]="counterId" class="text-sm text-neutral-500 block mt-1 text-right">{{ value().length }} / {{ maxLength() }}</span>
+  <span [id]="counterId" class="text-sm text-neutral-500 dark:text-gray-400 block mt-1 text-right">{{ value().length }} / {{ maxLength() }}</span>
 }

@@ -14,32 +14,46 @@
  limitations under the License.
 -->
 
-<div class="flex flex-col h-screen bg-neutral-50">
+<div class="flex flex-col h-screen bg-neutral-50 dark:bg-gray-900">
   <header
-    class="h-14 bg-white border-b border-neutral-200 flex items-center px-4 z-50 shrink-0"
+    class="h-14 bg-white dark:bg-gray-800 border-b border-neutral-200 dark:border-gray-700 flex items-center px-4 z-50 shrink-0"
   >
     <!-- hamburger -->
     <button
       (click)="toggleSidebar()"
-      class="lg:hidden mr-3 p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+      class="lg:hidden mr-3 p-2 hover:bg-neutral-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
       aria-label="Toggle menu"
     >
-      <i class="fa-solid fa-bars text-neutral-600 text-lg"></i>
+      <i class="fa-solid fa-bars text-neutral-600 dark:text-gray-400 text-lg"></i>
     </button>
 
     <!-- Brand -->
     <div class="flex items-center space-x-2 flex-1">
-      <i class="fa-solid fa-message text-neutral-600 text-xl"></i>
-      <h1 class="text-lg font-semibold text-neutral-800">Loci</h1>
+      <i class="fa-solid fa-message text-neutral-600 dark:text-gray-400 text-xl"></i>
+      <h1 class="text-lg font-semibold text-neutral-800 dark:text-gray-100">Loci</h1>
     </div>
 
     <!-- Actions -->
+    <div class="flex items-center space-x-2">
+      <button
+        (click)="toggleTheme()"
+        class="p-2 hover:bg-neutral-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+        [attr.aria-label]="themeService.isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+        [attr.title]="themeService.isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+      >
+        <i
+          class="fa-solid text-neutral-600 dark:text-gray-400"
+          [class.fa-sun]="themeService.isDark()"
+          [class.fa-moon]="!themeService.isDark()"
+        ></i>
+      </button>
+    </div>
     <!-- <div class="flex items-center space-x-2"> -->
-    <!--   <button class="p-2 hover:bg-neutral-100 rounded-lg transition-colors" (click)="openNofications()"> -->
-    <!--     <i  class="fa-solid fa-bell text-neutral-600"></i> -->
+    <!--   <button class="p-2 hover:bg-neutral-100 dark:hover:bg-gray-700 rounded-lg transition-colors" (click)="openNofications()"> -->
+    <!--     <i  class="fa-solid fa-bell text-neutral-600 dark:text-gray-400"></i> -->
     <!--   </button> -->
-    <!--   <button class="p-2 hover:bg-neutral-100 rounded-lg transition-colors" (click)="openSettings()"> -->
-    <!--     <i class="fa-solid fa-gear text-neutral-600"></i> -->
+    <!--   <button class="p-2 hover:bg-neutral-100 dark:hover:bg-gray-700 rounded-lg transition-colors" (click)="openSettings()"> -->
+    <!--     <i class="fa-solid fa-gear text-neutral-600 dark:text-gray-400"></i> -->
     <!--   </button> -->
     <!-- </div> -->
   </header>

@@ -115,7 +115,7 @@ export class Modal{
   });
 
   readonly cancelButtonClasses = signal(
-    'inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium border border-neutral-300 text-neutral-700 bg-white hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-400',
+    'inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium border border-neutral-300 dark:border-gray-600 text-neutral-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-neutral-50 dark:hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-400',
   );
 
   constructor() {

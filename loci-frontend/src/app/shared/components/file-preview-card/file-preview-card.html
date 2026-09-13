@@ -15,7 +15,7 @@
 -->
 
 <div
-  class="border border-neutral-300 rounded-lg p-2 flex items-center gap-2 bg-neutral-50 relative max-w-full"
+  class="border border-neutral-300 dark:border-gray-600 rounded-lg p-2 flex items-center gap-2 bg-neutral-50 dark:bg-gray-900 relative max-w-full"
   role="group"
   [attr.aria-label]="file().filename"
 >
@@ -24,7 +24,7 @@
     <!-- Replace app-button with your actual Button component selector -->
     <button
       type="button"
-      class="absolute top-1 right-1 bg-neutral-50 rounded-full p-0.5 shadow hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-primary)]"
+      class="absolute top-1 right-1 bg-neutral-50 dark:bg-gray-900 rounded-full p-0.5 shadow hover:bg-neutral-50 dark:hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-primary)]"
       (click)="onRemoveClicked()"
       [attr.aria-label]="removeAriaLabel"
     >
@@ -55,7 +55,7 @@
       [alt]="altText"
       width="48"
       height="48"
-      class="w-12 h-12 rounded object-cover flex-shrink-0 bg-neutral-200"
+      class="w-12 h-12 rounded object-cover flex-shrink-0 bg-neutral-200 dark:bg-gray-600"
     />
   } @else {
     <!-- File type icon -->
@@ -68,7 +68,7 @@
     ></lucide-icon>
     -->
     <div
-      [class]="'w-8 h-8 flex-shrink-0 rounded flex items-center justify-center bg-white ' + iconConfig().class"
+      [class]="'w-8 h-8 flex-shrink-0 rounded flex items-center justify-center bg-white dark:bg-gray-800 ' + iconConfig().class"
       aria-hidden="true"
     >
       <!-- simple fallback icon -->
@@ -90,12 +90,12 @@
   <!-- File info -->
   <div class="flex flex-col min-w-0">
     <div
-      class="text-sm font-medium truncate flex-1 text-neutral-900"
+      class="text-sm font-medium truncate flex-1 text-neutral-900 dark:text-gray-100"
       [title]="file().filename"
     >
       {{ truncatedFilename() }}
     </div>
-    <div class="text-xs text-neutral-500">
+    <div class="text-xs text-neutral-500 dark:text-gray-400">
       {{ file().size }}
     </div>
   </div>

@@ -19,12 +19,12 @@
   <label class="sr-only" [for]="inputId">Search</label>
 
   <div
-    class="border border-neutral-200 rounded-full px-4 py-2 flex items-center gap-2 bg-neutral-50 focus-within:bg-white focus-within:border-accent transition-colors duration-150"
+    class="border border-neutral-200 dark:border-gray-700 rounded-full px-4 py-2 flex items-center gap-2 bg-neutral-50 dark:bg-gray-900 focus-within:bg-white focus-within:border-accent transition-colors duration-150"
     role="search"
   >
     <!-- Left: Search icon (lucide Search path) -->
     <svg
-      class="w-4 h-4 shrink-0 text-neutral-500"
+      class="w-4 h-4 shrink-0 text-neutral-500 dark:text-gray-400"
       aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
@@ -41,7 +41,7 @@
     <input
       [id]="inputId"
       type="search"
-      class="flex-1 bg-transparent outline-none text-sm text-neutral-900 placeholder:text-neutral-400"
+      class="flex-1 bg-transparent outline-none text-sm text-neutral-900 dark:text-gray-100 placeholder:text-neutral-400 dark:placeholder:text-gray-500"
       [placeholder]="placeholder()"
       [formControl]="searchControl"
       role="combobox"
@@ -67,7 +67,7 @@
       <!-- Clear button -->
       <button
         type="button"
-        class="ml-1 inline-flex items-center justify-center rounded-full p-1 text-neutral-500 hover:text-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[color:var(--color-primary)]"
+        class="ml-1 inline-flex items-center justify-center rounded-full p-1 text-neutral-500 dark:text-gray-400 hover:text-neutral-700 dark:hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[color:var(--color-primary)]"
         aria-label="Clear search"
         (click)="onClearClicked()"
       >
@@ -93,13 +93,13 @@
     <ul
       [id]="autocompleteListId"
       role="listbox"
-      class="absolute top-full mt-2 w-full bg-white border border-neutral-200 rounded-lg shadow-lg max-h-60 overflow-y-auto z-20"
+      class="absolute top-full mt-2 w-full bg-white dark:bg-gray-800 border border-neutral-200 dark:border-gray-700 rounded-lg shadow-lg max-h-60 overflow-y-auto z-20"
     >
       @for (item of autocompleteItems(); track trackByItem(i, item); let i = $index) {
         <li
           role="option"
-          class="px-4 py-2 text-sm cursor-pointer text-neutral-900 hover:bg-neutral-100"
-          [class.bg-neutral-100]="highlightedIndexSignal() === i"
+          class="px-4 py-2 text-sm cursor-pointer text-neutral-900 dark:text-gray-100 hover:bg-neutral-100 dark:hover:bg-gray-700"
+          [class.bg-neutral-100]="highlightedIndexSignal() === i" [class.dark:bg-gray-700]="highlightedIndexSignal() === i"
           [attr.aria-selected]="highlightedIndexSignal() === i"
           (mouseenter)="onItemMouseEnter(i)"
           (mousedown)="onItemMouseDown($event, item, i)"

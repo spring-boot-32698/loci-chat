@@ -26,6 +26,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <script src="assets/env.js"></script>
+  <script>
+    (function () {
+      var stored = localStorage.getItem('loci-theme');
+      var dark = stored === 'dark'
+        || (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.classList.toggle('dark', dark);
+      document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+    })();
+  </script>
 </head>
 
 <body>

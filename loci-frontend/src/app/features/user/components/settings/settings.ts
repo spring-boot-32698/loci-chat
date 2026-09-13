@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ThemeMode, ThemeService } from '../../../../core/services/theme.service';
 
 @Component({
   selector: 'app-settings',
@@ -23,5 +24,9 @@ import { Component } from '@angular/core';
   styleUrl: './settings.css',
 })
 export class Settings {
+  protected themeService = inject(ThemeService);
 
+  setTheme(mode: ThemeMode): void {
+    this.themeService.setMode(mode);
+  }
 }

@@ -19,6 +19,7 @@ import { KeycloakAuthenticationManager } from './core/auth/keycloak-auth-manager
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { HeartbeatService } from './core/services/heartbeat.service';
+import { ThemeService } from './core/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,7 @@ export class App implements OnInit, OnDestroy {
   private heartbeatService = inject(HeartbeatService);
   private authService = inject(KeycloakAuthenticationManager);
   private router = inject(Router);
+  protected themeService = inject(ThemeService);
   public logout() {
     this.authService.logout();
   }
@@ -67,5 +69,9 @@ export class App implements OnInit, OnDestroy {
 
   closeSidebar() {
     this.isSidebarOpen.set(false);
+  }
+
+  toggleTheme() {
+    this.themeService.toggle();
   }
 }
