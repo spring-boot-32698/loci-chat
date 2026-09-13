@@ -16,7 +16,7 @@
 
 <section
   id="profile-panel"
-  class="flex-1 bg-white flex flex-col min-h-screen md:min-h-0
+  class="flex-1 bg-white dark:bg-gray-800 flex flex-col min-h-screen md:min-h-0
          w-full max-w-3xl mx-auto
          px-4 sm:px-6 lg:px-10 py-6 lg:py-10
          overflow-hidden"
@@ -25,18 +25,18 @@
   @if (isLoading()) {
     <div class="flex items-center justify-center min-h-[50vh]">
       <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-neutral-500 mx-auto mb-4"></div>
-        <p class="text-neutral-600 font-medium">Loading profile...</p>
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-neutral-500 dark:border-gray-400 mx-auto mb-4"></div>
+        <p class="text-neutral-600 dark:text-gray-400 font-medium">Loading profile...</p>
       </div>
     </div>
   }
 
   @else if (error()) {
     <div class="flex items-center justify-center min-h-[50vh] px-4">
-      <div class="bg-red-50 border border-red-200 rounded-xl p-6 text-center max-w-md w-full">
+      <div class="bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-xl p-6 text-center max-w-md w-full">
         <i class="fa-solid fa-exclamation-triangle text-red-500 text-4xl mb-4"></i>
-        <h3 class="text-lg font-semibold text-red-900 mb-2">Something went wrong</h3>
-        <p class="text-red-700 mb-6">{{ error() }}</p>
+        <h3 class="text-lg font-semibold text-red-900 dark:text-red-300 mb-2">Something went wrong</h3>
+        <p class="text-red-700 dark:text-red-300 mb-6">{{ error() }}</p>
         <button
           (click)="loadProfile()"
           class="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors"
@@ -50,9 +50,9 @@
   @else {
 
     <!-- Header -->
-    <div class="pb-5 border-b border-neutral-200">
-      <h2 class="text-xl text-black">My Profile</h2>
-      <p class="text-neutral-500 mt-1.5 text-sm sm:text-base">
+    <div class="pb-5 border-b border-neutral-200 dark:border-gray-700">
+      <h2 class="text-xl text-black dark:text-gray-100">My Profile</h2>
+      <p class="text-neutral-500 dark:text-gray-400 mt-1.5 text-sm sm:text-base">
         Manage your personal information and privacy settings
       </p>
     </div>
@@ -63,7 +63,7 @@
       <form [formGroup]="profileForm" class="space-y-6 pb-10">
 
         <!-- Profile Info Card -->
-        <div class="bg-white border border-neutral-200 rounded-xl shadow-sm p-5 sm:p-6">
+        <div class="bg-white dark:bg-gray-800 border border-neutral-200 dark:border-gray-700 rounded-xl shadow-sm p-5 sm:p-6">
 
           <div class="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 mb-6">
             <div class="relative shrink-0">
@@ -77,8 +77,8 @@
               ></app-avatar>
             </div>
             <div>
-              <h3 class="text-lg font-medium text-gray-900">Profile Photo</h3>
-              <p class="text-sm text-neutral-500 mt-1">
+              <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">Profile Photo</h3>
+              <p class="text-sm text-neutral-500 dark:text-gray-400 mt-1">
                 Tap the camera icon to update your avatar
               </p>
             </div>
@@ -86,29 +86,29 @@
 
           <div class="space-y-5">
             <div>
-              <label class="block text-sm font-medium text-neutral-700 mb-1.5">First Name</label>
+              <label class="block text-sm font-medium text-neutral-700 dark:text-gray-300 mb-1.5">First Name</label>
               <input
                 type="text"
                 formControlName="firstname"
-                class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-400 text-base"
+                class="w-full px-4 py-3 border border-neutral-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-400 text-base"
                 placeholder="Your first name"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-neutral-700 mb-1.5">Last Name</label>
+              <label class="block text-sm font-medium text-neutral-700 dark:text-gray-300 mb-1.5">Last Name</label>
               <input
                 type="text"
                 formControlName="lastname"
-                class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-400 text-base"
+                class="w-full px-4 py-3 border border-neutral-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-400 text-base"
                 placeholder="Your last name"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-neutral-700 mb-1.5">Username</label>
-              <div class="flex items-center border border-neutral-200 rounded-lg bg-neutral-50 overflow-hidden">
-                <span class="px-4 text-neutral-500 font-medium">@</span>
+              <label class="block text-sm font-medium text-neutral-700 dark:text-gray-300 mb-1.5">Username</label>
+              <div class="flex items-center border border-neutral-200 dark:border-gray-700 rounded-lg bg-neutral-50 dark:bg-gray-900 overflow-hidden">
+                <span class="px-4 text-neutral-500 dark:text-gray-400 font-medium">@</span>
                 <input
                   type="text"
                   formControlName="username"
@@ -116,18 +116,18 @@
                   readonly
                 />
               </div>
-              <p class="text-xs text-neutral-500 mt-1.5">Username cannot be changed</p>
+              <p class="text-xs text-neutral-500 dark:text-gray-400 mt-1.5">Username cannot be changed</p>
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-neutral-700 mb-1.5">Email Address</label>
+              <label class="block text-sm font-medium text-neutral-700 dark:text-gray-300 mb-1.5">Email Address</label>
               <input
                 type="email"
                 formControlName="emailAddress"
-                class="w-full px-4 py-3 border border-neutral-200 rounded-lg bg-neutral-50 text-base cursor-not-allowed"
+                class="w-full px-4 py-3 border border-neutral-200 dark:border-gray-700 rounded-lg bg-neutral-50 dark:bg-gray-900 text-base cursor-not-allowed"
                 readonly
               />
-              <p class="text-xs text-neutral-500 mt-1.5">Contact support to change email</p>
+              <p class="text-xs text-neutral-500 dark:text-gray-400 mt-1.5">Contact support to change email</p>
             </div>
           </div>
 
@@ -144,12 +144,12 @@
         </div>
 
         <!-- Activity Status -->
-        <div class="bg-white border border-neutral-200 rounded-xl shadow-sm p-5 sm:p-6">
-          <h3 class="text-lg font-medium text-gray-900 mb-4">Activity Status</h3>
+        <div class="bg-white dark:bg-gray-800 border border-neutral-200 dark:border-gray-700 rounded-xl shadow-sm p-5 sm:p-6">
+          <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Activity Status</h3>
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-neutral-700 font-medium">Show when I'm active</p>
-              <p class="text-xs text-neutral-500 mt-0.5">Let others see when you were last active</p>
+              <p class="text-sm text-neutral-700 dark:text-gray-300 font-medium">Show when I'm active</p>
+              <p class="text-xs text-neutral-500 dark:text-gray-400 mt-0.5">Let others see when you were last active</p>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input
@@ -158,7 +158,7 @@
                 class="sr-only peer"
               />
               <div
-                class="w-11 h-6 bg-neutral-200 rounded-full peer peer-checked:bg-neutral-600
+                class="w-11 h-6 bg-neutral-200 dark:bg-gray-600 rounded-full peer peer-checked:bg-neutral-600
                        after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white
                        after:rounded-full after:h-4 after:w-4 after:transition-all
                        peer-checked:after:translate-x-5"
@@ -172,19 +172,19 @@
       <form [formGroup]="settingForm" class="space-y-6 pb-12">
 
         <!-- Privacy Settings -->
-        <div class="bg-white border border-neutral-200 rounded-xl shadow-sm p-5 sm:p-6">
-          <h3 class="text-lg font-medium text-gray-900 mb-5">Privacy Settings</h3>
+        <div class="bg-white dark:bg-gray-800 border border-neutral-200 dark:border-gray-700 rounded-xl shadow-sm p-5 sm:p-6">
+          <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-5">Privacy Settings</h3>
 
           <div class="space-y-6">
             <div class="flex items-center justify-between gap-4">
               <div>
-                <p class="text-sm text-neutral-700 font-medium">Last Seen</p>
-                <p class="text-xs text-neutral-500 mt-0.5">Control who can see when you were last online</p>
+                <p class="text-sm text-neutral-700 dark:text-gray-300 font-medium">Last Seen</p>
+                <p class="text-xs text-neutral-500 dark:text-gray-400 mt-0.5">Control who can see when you were last online</p>
               </div>
               <select
                 formControlName="lastSeenSetting"
                 (change)="saveSettings()"
-                class="min-w-[140px] px-4 py-2.5 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-white text-sm"
+                class="min-w-[140px] px-4 py-2.5 border border-neutral-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-white dark:bg-gray-800 text-sm"
               >
                 <option>Everyone</option>
                 <option>Contacts Only</option>
@@ -194,13 +194,13 @@
 
             <div class="flex items-center justify-between gap-4">
               <div>
-                <p class="text-sm text-neutral-700 font-medium">Friend Requests</p>
-                <p class="text-xs text-neutral-500 mt-0.5">Who can send you friend requests</p>
+                <p class="text-sm text-neutral-700 dark:text-gray-300 font-medium">Friend Requests</p>
+                <p class="text-xs text-neutral-500 dark:text-gray-400 mt-0.5">Who can send you friend requests</p>
               </div>
               <select
                 formControlName="friendRequests"
                 (change)="saveSettings()"
-                class="min-w-[140px] px-4 py-2.5 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-white text-sm"
+                class="min-w-[140px] px-4 py-2.5 border border-neutral-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-white dark:bg-gray-800 text-sm"
               >
                 <option>Everyone</option>
                 <option>Friends of Friends</option>
@@ -210,8 +210,8 @@
 
             <div class="flex items-center justify-between gap-4">
               <div>
-                <p class="text-sm text-neutral-700 font-medium">Profile Visibility</p>
-                <p class="text-xs text-neutral-500 mt-0.5">Control who can view your profile information</p>
+                <p class="text-sm text-neutral-700 dark:text-gray-300 font-medium">Profile Visibility</p>
+                <p class="text-xs text-neutral-500 dark:text-gray-400 mt-0.5">Control who can view your profile information</p>
               </div>
               <label class="relative inline-flex items-center cursor-pointer">
                 <input
@@ -221,7 +221,7 @@
                   class="sr-only peer"
                 />
                 <div
-                  class="w-11 h-6 bg-neutral-200 rounded-full peer peer-checked:bg-neutral-600
+                  class="w-11 h-6 bg-neutral-200 dark:bg-gray-600 rounded-full peer peer-checked:bg-neutral-600
                          after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white
                          after:rounded-full after:h-4 after:w-4 after:transition-all
                          peer-checked:after:translate-x-5"

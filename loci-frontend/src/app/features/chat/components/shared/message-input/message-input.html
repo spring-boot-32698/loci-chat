@@ -14,12 +14,12 @@
  limitations under the License.
 -->
 
-<div class="p-4 border-t border-neutral-200 bg-white">
+<div class="p-4 border-t border-neutral-200 dark:border-gray-700 bg-white dark:bg-gray-800">
   <div class="flex items-end gap-3">
 
     <input type="file" #fileInput (change)="onFileSelected($event)" [disabled] = "isDisabled()" hidden [accept]="acceptedFileTypes()">
 
-    <button class="p-2 text-neutral-400 hover:text-neutral-600 disabled:opacity-50 transition-colors"
+    <button class="p-2 text-neutral-400 dark:text-gray-500 hover:text-neutral-600 disabled:opacity-50 transition-colors"
       (click)="fileInput.click()" [disabled]="isUploading()"
       [attr.aria-label]="isUploading() ? 'Uploading file' : 'Attach file'">
       @if (isUploading()) {
@@ -32,7 +32,7 @@
     <div class="flex-1 relative">
       <textarea #textarea [(ngModel)]="content" (input)="onInput()" (keydown)="onKeydown($event)"
         [placeholder]="placeholder()" [disabled]="isSending()" rows="1"
-        class="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500 resize-none disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px] max-h-[120px]">
+        class="w-full px-4 py-3 border border-neutral-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500 resize-none disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px] max-h-[120px]">
       </textarea>
     </div>
 

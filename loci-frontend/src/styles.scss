@@ -17,6 +17,13 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #ffffff;
+  color: #111827;
+}
+
+:root.dark body {
+  background-color: #111827;
+  color: #f3f4f6;
 }
 
 

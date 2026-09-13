@@ -75,12 +75,12 @@ export class ErrorCardComponent {
   colorClasses = computed(() => {
     switch (this.type()) {
       case 'warning':
-        return 'bg-yellow-50 text-yellow-900 border border-yellow-200';
+        return 'bg-yellow-50 dark:bg-yellow-950 text-yellow-900 dark:text-yellow-200 border border-yellow-200 dark:border-yellow-800';
       case 'info':
-        return 'bg-blue-50 text-blue-900 border border-blue-200';
+        return 'bg-blue-50 dark:bg-blue-950 text-blue-900 dark:text-blue-200 border border-blue-200 dark:border-blue-800';
       case 'error':
       default:
-        return 'bg-red-50 text-red-900 border border-red-200';
+        return 'bg-red-50 dark:bg-red-950 text-red-900 dark:text-red-200 border border-red-200 dark:border-red-800';
     }
   });
 

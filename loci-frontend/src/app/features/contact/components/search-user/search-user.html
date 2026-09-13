@@ -14,19 +14,19 @@
  limitations under the License.
 -->
 
-<main id="main-content" class="flex flex-col min-h-screen bg-gray-50">
+<main id="main-content" class="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
 
-  <section id="search-users-panel" class="flex-1 flex flex-col bg-white">
+  <section id="search-users-panel" class="flex-1 flex flex-col bg-white dark:bg-gray-800">
 
     <!-- Header - sticky on mobile -->
-    <div class="sticky top-0 z-10 bg-white border-b border-neutral-200 px-4 py-5 sm:px-6">
+    <div class="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b border-neutral-200 dark:border-gray-700 px-4 py-5 sm:px-6">
       <div class="flex items-center ">
-        <!-- <button type="button" class="py-2 px-10 -mr-2 text-neutral-500 hover:text-neutral-700 active:text-neutral-900"> -->
+        <!-- <button type="button" class="py-2 px-10 -mr-2 text-neutral-500 dark:text-gray-400 hover:text-neutral-700 dark:hover:text-gray-200 active:text-neutral-900"> -->
         <!--   <i class="fa-solid fa-arrow-left text-xl"></i> -->
         <!-- </button> -->
         <div>
-          <h2 class="text-xl text-black">Search Users</h2>
-          <p class="text-sm sm:text-base text-neutral-500 mt-0.5">
+          <h2 class="text-xl text-black dark:text-gray-100">Search Users</h2>
+          <p class="text-sm sm:text-base text-neutral-500 dark:text-gray-400 mt-0.5">
             Find and connect with new people
           </p>
         </div>
@@ -38,10 +38,10 @@
           <input
             type="text"
             placeholder="Search by username, email, or name..."
-            class="w-full pl-11 pr-4 py-3.5 bg-white border border-neutral-300 rounded-xl text-base placeholder-neutral-400 focus:outline-none focus:border-neutral-500 focus:ring-1 focus:ring-neutral-400 transition"
+            class="w-full pl-11 pr-4 py-3.5 bg-white dark:bg-gray-800 border border-neutral-300 dark:border-gray-600 rounded-xl text-base placeholder-neutral-400 dark:placeholder-gray-500 focus:outline-none focus:border-neutral-500 focus:ring-1 focus:ring-neutral-400 transition"
             [formControl]="searchControl"
           />
-          <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 text-lg"></i>
+          <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-gray-500 text-lg"></i>
         </div>
       </div>
     </div>
@@ -55,18 +55,18 @@
         @if (loading()) {
           <div class="flex items-center justify-center py-12">
             <div class="flex items-center gap-3">
-              <div class="w-7 h-7 border-3 border-neutral-200 border-t-neutral-600 rounded-full animate-spin"></div>
-              <span class="text-neutral-600 font-medium">Searching users...</span>
+              <div class="w-7 h-7 border-3 border-neutral-200 dark:border-gray-700 border-t-neutral-600 rounded-full animate-spin"></div>
+              <span class="text-neutral-600 dark:text-gray-400 font-medium">Searching users...</span>
             </div>
           </div>
         } @else if (!users() || users().length === 0) {
           <!-- empty state -->
-          <div class="mt-10 bg-white border border-neutral-200 rounded-2xl p-8 sm:p-10 text-center">
-            <div class="w-20 h-20 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <i class="fa-solid fa-search text-neutral-400 text-3xl"></i>
+          <div class="mt-10 bg-white dark:bg-gray-800 border border-neutral-200 dark:border-gray-700 rounded-2xl p-8 sm:p-10 text-center">
+            <div class="w-20 h-20 bg-neutral-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fa-solid fa-search text-neutral-400 dark:text-gray-500 text-3xl"></i>
             </div>
-            <h3 class="text-xl font-semibold text-black mb-3">No users found</h3>
-            <p class="text-neutral-500 leading-relaxed max-w-md mx-auto">
+            <h3 class="text-xl font-semibold text-black dark:text-gray-100 mb-3">No users found</h3>
+            <p class="text-neutral-500 dark:text-gray-400 leading-relaxed max-w-md mx-auto">
               Try adjusting your search terms or check the spelling
             </p>
           </div>

@@ -74,7 +74,7 @@ export class FilePreviewCard {
     }
 
     // Default
-    return { icon: 'File', class: 'text-neutral-400' };
+    return { icon: 'File', class: 'text-neutral-400 dark:text-gray-500' };
   });
 
   readonly truncatedFilename = computed(() => {

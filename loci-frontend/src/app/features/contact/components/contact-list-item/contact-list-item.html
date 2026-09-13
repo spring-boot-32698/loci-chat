@@ -14,7 +14,7 @@
  limitations under the License.
 -->
 
-<div class="bg-white border border-neutral-200 rounded-lg p-4 hover:bg-neutral-50 transition-colors">
+<div class="bg-white dark:bg-gray-800 border border-neutral-200 dark:border-gray-700 rounded-lg p-4 hover:bg-neutral-50 dark:hover:bg-gray-700 transition-colors">
   <div class="flex items-center space-x-4">
     <!-- Profile Image - clickable to view profile -->
     <img
@@ -26,12 +26,12 @@
     <!-- User Info -->
     <div class="flex-1 min-w-0">
       <h4
-        class="text-lg text-black font-medium cursor-pointer hover:text-neutral-700 transition-colors"
+        class="text-lg text-black dark:text-gray-100 font-medium cursor-pointer hover:text-neutral-700 dark:hover:text-gray-200 transition-colors"
         (click)="navigateToProfile()">
         {{ user().fullname }}
       </h4>
-      <p class="text-sm text-neutral-500">&#64;{{ user().username }}</p>
-      <p class="text-xs text-neutral-400 mt-1">{{ user().email }}</p>
+      <p class="text-sm text-neutral-500 dark:text-gray-400">&#64;{{ user().username }}</p>
+      <p class="text-xs text-neutral-400 dark:text-gray-500 mt-1">{{ user().email }}</p>
     </div>
 
     <!-- Action Buttons -->
@@ -69,29 +69,29 @@
       @else if (canUnsendRequest()) {
         <button
           (click)="onPendingClick($event)"
-          class="bg-white border border-neutral-300 text-neutral-700 px-4 py-2 rounded-lg
-                 hover:bg-neutral-50 transition-colors text-sm flex items-center space-x-2 cursor-pointer">
+          class="bg-white dark:bg-gray-800 border border-neutral-300 dark:border-gray-600 text-neutral-700 dark:text-gray-300 px-4 py-2 rounded-lg
+                 hover:bg-neutral-50 dark:hover:bg-gray-700 transition-colors text-sm flex items-center space-x-2 cursor-pointer">
           <i class="fa-solid fa-clock"></i>
           <span>Pending</span>
         </button>
       }
       <!-- User Blocked by Me -->
       @else if (isBlocked()) {
-        <div class="bg-white border border-red-200 text-red-700 px-4 py-2 rounded-lg text-sm flex items-center space-x-2">
+        <div class="bg-white dark:bg-gray-800 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-2 rounded-lg text-sm flex items-center space-x-2">
           <i class="fa-solid fa-ban"></i>
           <span>Blocked</span>
         </div>
       }
       <!-- Blocked by User -->
       @else if (isBlockedBy()) {
-        <div class="bg-white border border-red-200 text-red-700 px-4 py-2 rounded-lg text-sm flex items-center space-x-2">
+        <div class="bg-white dark:bg-gray-800 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-2 rounded-lg text-sm flex items-center space-x-2">
           <i class="fa-solid fa-user-lock"></i>
           <span>Blocked by User</span>
         </div>
       }
       <!-- Unknown Status -->
       @else {
-        <div class="bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm">
+        <div class="bg-gray-50 dark:bg-gray-900 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg text-sm">
           <span>Unknown Status</span>
         </div>
       }

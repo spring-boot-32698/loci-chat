@@ -14,15 +14,15 @@
  limitations under the License.
 -->
 
-<section id="settings-panel" class="flex-1 bg-white flex flex-col max-w-full">
-  <div id="settings-header" class="p-6 border-b border-neutral-200">
+<section id="settings-panel" class="flex-1 bg-white dark:bg-gray-800 flex flex-col max-w-full">
+  <div id="settings-header" class="p-6 border-b border-neutral-200 dark:border-gray-700">
     <div class="flex items-center space-x-4">
-      <button class="p-2 hover:bg-neutral-100 rounded-lg">
-        <i class="fa-solid fa-arrow-left text-neutral-600"></i>
+      <button class="p-2 hover:bg-neutral-100 dark:hover:bg-gray-700 rounded-lg">
+        <i class="fa-solid fa-arrow-left text-neutral-600 dark:text-gray-400"></i>
       </button>
       <div>
-        <h2 class="text-xl text-black">Settings</h2>
-        <p class="text-sm text-neutral-500">Manage your app preferences</p>
+        <h2 class="text-xl text-black dark:text-gray-100">Settings</h2>
+        <p class="text-sm text-neutral-500 dark:text-gray-400">Manage your app preferences</p>
       </div>
     </div>
   </div>
@@ -30,175 +30,178 @@
   <div id="settings-content" class="flex-1 overflow-y-auto p-6">
     <div class="max-w-full space-y-8">
 
-      <div id="notifications-section" class="bg-white border border-neutral-200 rounded-lg p-6 shadow-sm">
+      <div id="notifications-section" class="bg-white dark:bg-gray-800 border border-neutral-200 dark:border-gray-700 rounded-lg p-6 shadow-sm">
         <div class="flex items-center space-x-3 mb-4">
-          <i class="fa-solid fa-bell text-neutral-600"></i>
-          <h3 class="text-lg text-black">Notifications</h3>
+          <i class="fa-solid fa-bell text-neutral-600 dark:text-gray-400"></i>
+          <h3 class="text-lg text-black dark:text-gray-100">Notifications</h3>
         </div>
         <div class="space-y-4">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-black">Push Notifications</p>
-              <p class="text-xs text-neutral-500">Receive notifications for new messages</p>
+              <p class="text-sm text-black dark:text-gray-100">Push Notifications</p>
+              <p class="text-xs text-neutral-500 dark:text-gray-400">Receive notifications for new messages</p>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" checked class="sr-only peer">
               <div
-                class="w-11 h-6 bg-neutral-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
+                class="w-11 h-6 bg-neutral-200 dark:bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
               </div>
             </label>
           </div>
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-black">Email Notifications</p>
-              <p class="text-xs text-neutral-500">Get email alerts for important updates</p>
+              <p class="text-sm text-black dark:text-gray-100">Email Notifications</p>
+              <p class="text-xs text-neutral-500 dark:text-gray-400">Get email alerts for important updates</p>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" class="sr-only peer">
               <div
-                class="w-11 h-6 bg-neutral-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
+                class="w-11 h-6 bg-neutral-200 dark:bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
               </div>
             </label>
           </div>
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-black">Sound Alerts</p>
-              <p class="text-xs text-neutral-500">Play sound for incoming messages</p>
+              <p class="text-sm text-black dark:text-gray-100">Sound Alerts</p>
+              <p class="text-xs text-neutral-500 dark:text-gray-400">Play sound for incoming messages</p>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" checked class="sr-only peer">
               <div
-                class="w-11 h-6 bg-neutral-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
+                class="w-11 h-6 bg-neutral-200 dark:bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
               </div>
             </label>
           </div>
         </div>
       </div>
 
-      <div id="privacy-section" class="bg-white border border-neutral-200 rounded-lg p-6 shadow-sm">
+      <div id="privacy-section" class="bg-white dark:bg-gray-800 border border-neutral-200 dark:border-gray-700 rounded-lg p-6 shadow-sm">
         <div class="flex items-center space-x-3 mb-4">
-          <i class="fa-solid fa-shield-alt text-neutral-600"></i>
-          <h3 class="text-lg text-black">Privacy</h3>
+          <i class="fa-solid fa-shield-alt text-neutral-600 dark:text-gray-400"></i>
+          <h3 class="text-lg text-black dark:text-gray-100">Privacy</h3>
         </div>
         <div class="space-y-4">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-black">Show Last Seen</p>
-              <p class="text-xs text-neutral-500">Let others see when you were last active</p>
+              <p class="text-sm text-black dark:text-gray-100">Show Last Seen</p>
+              <p class="text-xs text-neutral-500 dark:text-gray-400">Let others see when you were last active</p>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" checked class="sr-only peer">
               <div
-                class="w-11 h-6 bg-neutral-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
+                class="w-11 h-6 bg-neutral-200 dark:bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
               </div>
             </label>
           </div>
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-black">Read Receipts</p>
-              <p class="text-xs text-neutral-500">Show when you've read messages</p>
+              <p class="text-sm text-black dark:text-gray-100">Read Receipts</p>
+              <p class="text-xs text-neutral-500 dark:text-gray-400">Show when you've read messages</p>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" class="sr-only peer">
               <div
-                class="w-11 h-6 bg-neutral-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
+                class="w-11 h-6 bg-neutral-200 dark:bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
               </div>
             </label>
           </div>
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-black">Allow Friend Requests</p>
-              <p class="text-xs text-neutral-500">Let others send you friend requests</p>
+              <p class="text-sm text-black dark:text-gray-100">Allow Friend Requests</p>
+              <p class="text-xs text-neutral-500 dark:text-gray-400">Let others send you friend requests</p>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" checked class="sr-only peer">
               <div
-                class="w-11 h-6 bg-neutral-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
+                class="w-11 h-6 bg-neutral-200 dark:bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
               </div>
             </label>
           </div>
         </div>
       </div>
 
-      <div id="account-section" class="bg-white border border-neutral-200 rounded-lg p-6 shadow-sm">
+      <div id="account-section" class="bg-white dark:bg-gray-800 border border-neutral-200 dark:border-gray-700 rounded-lg p-6 shadow-sm">
         <div class="flex items-center space-x-3 mb-4">
-          <i class="fa-solid fa-user text-neutral-600"></i>
-          <h3 class="text-lg text-black">Account</h3>
+          <i class="fa-solid fa-user text-neutral-600 dark:text-gray-400"></i>
+          <h3 class="text-lg text-black dark:text-gray-100">Account</h3>
         </div>
         <div class="space-y-4">
           <button
-            class="w-full flex items-center justify-between p-3 border border-neutral-200 rounded-lg hover:bg-neutral-50">
+            class="w-full flex items-center justify-between p-3 border border-neutral-200 dark:border-gray-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-gray-700">
             <div class="flex items-center space-x-3">
-              <i class="fa-solid fa-key text-neutral-600"></i>
+              <i class="fa-solid fa-key text-neutral-600 dark:text-gray-400"></i>
               <div class="text-left">
-                <p class="text-sm text-black">Change Password</p>
-                <p class="text-xs text-neutral-500">Update your account password</p>
+                <p class="text-sm text-black dark:text-gray-100">Change Password</p>
+                <p class="text-xs text-neutral-500 dark:text-gray-400">Update your account password</p>
               </div>
             </div>
-            <i class="fa-solid fa-chevron-right text-neutral-400"></i>
+            <i class="fa-solid fa-chevron-right text-neutral-400 dark:text-gray-500"></i>
           </button>
           <button
-            class="w-full flex items-center justify-between p-3 border border-neutral-200 rounded-lg hover:bg-neutral-50">
+            class="w-full flex items-center justify-between p-3 border border-neutral-200 dark:border-gray-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-gray-700">
             <div class="flex items-center space-x-3">
-              <i class="fa-solid fa-download text-neutral-600"></i>
+              <i class="fa-solid fa-download text-neutral-600 dark:text-gray-400"></i>
               <div class="text-left">
-                <p class="text-sm text-black">Export Data</p>
-                <p class="text-xs text-neutral-500">Download your chat history</p>
+                <p class="text-sm text-black dark:text-gray-100">Export Data</p>
+                <p class="text-xs text-neutral-500 dark:text-gray-400">Download your chat history</p>
               </div>
             </div>
-            <i class="fa-solid fa-chevron-right text-neutral-400"></i>
+            <i class="fa-solid fa-chevron-right text-neutral-400 dark:text-gray-500"></i>
           </button>
           <button
-            class="w-full flex items-center justify-between p-3 border border-neutral-200 rounded-lg hover:bg-neutral-50 text-neutral-600">
+            class="w-full flex items-center justify-between p-3 border border-neutral-200 dark:border-gray-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-gray-700 text-neutral-600 dark:text-gray-400">
             <div class="flex items-center space-x-3">
-              <i class="fa-solid fa-trash text-neutral-600"></i>
+              <i class="fa-solid fa-trash text-neutral-600 dark:text-gray-400"></i>
               <div class="text-left">
-                <p class="text-sm text-neutral-600">Delete Account</p>
-                <p class="text-xs text-neutral-400">Permanently delete your account</p>
+                <p class="text-sm text-neutral-600 dark:text-gray-400">Delete Account</p>
+                <p class="text-xs text-neutral-400 dark:text-gray-500">Permanently delete your account</p>
               </div>
             </div>
-            <i class="fa-solid fa-chevron-right text-neutral-400"></i>
+            <i class="fa-solid fa-chevron-right text-neutral-400 dark:text-gray-500"></i>
           </button>
         </div>
       </div>
 
-      <div id="appearance-section" class="bg-white border border-neutral-200 rounded-lg p-6 shadow-sm">
+      <div id="appearance-section" class="bg-white dark:bg-gray-800 border border-neutral-200 dark:border-gray-700 rounded-lg p-6 shadow-sm">
         <div class="flex items-center space-x-3 mb-4">
-          <i class="fa-solid fa-palette text-neutral-600"></i>
-          <h3 class="text-lg text-black">Appearance</h3>
+          <i class="fa-solid fa-palette text-neutral-600 dark:text-gray-400"></i>
+          <h3 class="text-lg text-black dark:text-gray-100">Appearance</h3>
         </div>
         <div class="space-y-4">
           <div>
-            <p class="text-sm text-black mb-3">Theme</p>
+            <p class="text-sm text-black dark:text-gray-100 mb-3">Theme</p>
             <div class="grid grid-cols-3 gap-3">
               <label class="cursor-pointer">
-                <input type="radio" name="theme" value="light" checked class="sr-only peer">
+                <input type="radio" name="theme" value="light" [checked]="themeService.mode() === 'light'"
+                  (change)="setTheme('light')" class="sr-only peer">
                 <div
-                  class="p-3 border-2 border-neutral-200 rounded-lg peer-checked:border-neutral-600 peer-checked:bg-neutral-50">
+                  class="p-3 border-2 border-neutral-200 dark:border-gray-700 rounded-lg peer-checked:border-neutral-600 dark:peer-checked:border-gray-400 peer-checked:bg-neutral-50 dark:peer-checked:bg-gray-700">
                   <div class="flex items-center space-x-2">
-                    <div class="w-4 h-4 bg-white border border-neutral-300 rounded"></div>
-                    <span class="text-sm text-black">Light</span>
+                    <div class="w-4 h-4 bg-white dark:bg-gray-800 border border-neutral-300 dark:border-gray-600 rounded"></div>
+                    <span class="text-sm text-black dark:text-gray-100">Light</span>
                   </div>
                 </div>
               </label>
               <label class="cursor-pointer">
-                <input type="radio" name="theme" value="dark" class="sr-only peer">
+                <input type="radio" name="theme" value="dark" [checked]="themeService.mode() === 'dark'"
+                  (change)="setTheme('dark')" class="sr-only peer">
                 <div
-                  class="p-3 border-2 border-neutral-200 rounded-lg peer-checked:border-neutral-600 peer-checked:bg-neutral-50">
+                  class="p-3 border-2 border-neutral-200 dark:border-gray-700 rounded-lg peer-checked:border-neutral-600 dark:peer-checked:border-gray-400 peer-checked:bg-neutral-50 dark:peer-checked:bg-gray-700">
                   <div class="flex items-center space-x-2">
-                    <div class="w-4 h-4 bg-neutral-800 border border-neutral-600 rounded"></div>
-                    <span class="text-sm text-black">Dark</span>
+                    <div class="w-4 h-4 bg-neutral-800 border border-neutral-600 dark:border-gray-400 rounded"></div>
+                    <span class="text-sm text-black dark:text-gray-100">Dark</span>
                   </div>
                 </div>
               </label>
               <label class="cursor-pointer">
-                <input type="radio" name="theme" value="auto" class="sr-only peer">
+                <input type="radio" name="theme" value="auto" [checked]="themeService.mode() === 'system'"
+                  (change)="setTheme('system')" class="sr-only peer">
                 <div
-                  class="p-3 border-2 border-neutral-200 rounded-lg peer-checked:border-neutral-600 peer-checked:bg-neutral-50">
+                  class="p-3 border-2 border-neutral-200 dark:border-gray-700 rounded-lg peer-checked:border-neutral-600 dark:peer-checked:border-gray-400 peer-checked:bg-neutral-50 dark:peer-checked:bg-gray-700">
                   <div class="flex items-center space-x-2">
-                    <div class="w-4 h-4 bg-gradient-to-r from-white to-neutral-800 border border-neutral-300 rounded">
+                    <div class="w-4 h-4 bg-gradient-to-r from-white to-neutral-800 border border-neutral-300 dark:border-gray-600 rounded">
                     </div>
-                    <span class="text-sm text-black">Auto</span>
+                    <span class="text-sm text-black dark:text-gray-100">Auto</span>
                   </div>
                 </div>
               </label>
@@ -206,13 +209,13 @@
           </div>
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-black">Compact Mode</p>
-              <p class="text-xs text-neutral-500">Show more content in less space</p>
+              <p class="text-sm text-black dark:text-gray-100">Compact Mode</p>
+              <p class="text-xs text-neutral-500 dark:text-gray-400">Show more content in less space</p>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" class="sr-only peer">
               <div
-                class="w-11 h-6 bg-neutral-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
+                class="w-11 h-6 bg-neutral-200 dark:bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-600">
               </div>
             </label>
           </div>

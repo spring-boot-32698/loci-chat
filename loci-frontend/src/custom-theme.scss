@@ -18,12 +18,18 @@ html {
   );
 }
 
-body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
+:root {
+  // Default the application to a light color theme. Toggled at runtime
+  // (see ThemeService) by setting `color-scheme` + the `.dark` class on
+  // `<html>`, which flips Angular Material's `light-dark()`-based tokens.
   color-scheme: light;
+}
 
+:root.dark {
+  color-scheme: dark;
+}
+
+body {
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these
   // variables at https://material.angular.dev/guide/system-variables
