@@ -143,7 +143,7 @@ services:
     restart: "no"
 
   loci-minio:
-    image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
+    image: cgr.dev/chainguard/minio:latest # quay.io/minio images no longer public
     container_name: loci-minio
     environment:
       - MINIO_ROOT_USER=minioadmin
@@ -158,7 +158,7 @@ services:
       - "9000:9000"
       - "9001:9001"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      test: ["CMD-SHELL", "mc alias set h http://localhost:9000 minioadmin minioadmin >/dev/null && mc ready h"]
       interval: 30s
       timeout: 20s
       retries: 3
@@ -176,7 +176,7 @@ services:
       - loci-net
 
   loci-minio-mc:
-    image: quay.io/minio/mc:RELEASE.2025-08-13T08-35-41Z-cpuv1
+    image: cgr.dev/chainguard/minio:latest # bundles mc + sh
     container_name: loci-minio-client
     depends_on:
       - loci-minio

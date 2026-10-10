@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 5dieaXYuUgrAplz85rxto7DV2cv0Mbl7mJZXfschbB7CBkR3Nd8F4BU6VeOi0gM
+\restrict 8RmvJbIps5Jn2Zafvy0O6X9LszOVdgAWgeWktesmDP3qUnMeapH06q7OCc3E5b9
 
 -- Dumped from database version 18.1 (Debian 18.1-1.pgdg13+2)
 -- Dumped by pg_dump version 18.1 (Debian 18.1-1.pgdg13+2)
@@ -3396,6 +3396,11 @@ a2d7b307-c5be-43ea-bca2-a1035251e98f	\N	password	27e24793-eb80-4ba8-9ace-95f432c
 5a47f8f5-1782-46cd-bfa8-b87c75719c52	\N	password	cd2e474a-f099-4cce-ac9f-4d047fd00a01	1764321439165	\N	{"value":"IKJRKUvzKfSkDymzwH+Wb6k2vbmM/4N6sryVOeZZg9k=","salt":"mv6VCQF/bx8mg9Fa23XrHA==","additionalParameters":{}}	{"hashIterations":5,"algorithm":"argon2","additionalParameters":{"hashLength":["32"],"memory":["7168"],"type":["id"],"version":["1.3"],"parallelism":["1"]}}	10
 0c6686be-24f0-4813-97bd-7bb0c89ec71d	\N	password	4c8aa205-60a4-4caf-8b62-34777a9784dc	1764321072346	\N	{"value":"hqExNklwPtrhWNdYn5nCL/oQtOzOG57r8TKjRsQhpkg=","salt":"F0M3feF5WSzYGB3tvU5r+A==","additionalParameters":{}}	{"hashIterations":5,"algorithm":"argon2","additionalParameters":{"hashLength":["32"],"memory":["7168"],"type":["id"],"version":["1.3"],"parallelism":["1"]}}	10
 254ebba4-770b-4f14-904b-a6d40f65aecc	\N	password	4aed1f3e-884c-47f0-921a-4ca32c3d4a6b	1773636321763	\N	{"value":"pa8RDBM2INtyLnzTUueoSH3hi7awgwFjfAHPf7urBb0=","salt":"06tM8nT0PKC2/q+TLKIvpg==","additionalParameters":{}}	{"hashIterations":5,"algorithm":"argon2","additionalParameters":{"hashLength":["32"],"memory":["7168"],"type":["id"],"version":["1.3"],"parallelism":["1"]}}	10
+1abf9c56-2c78-471e-a79a-0ede5f71d8cd	\N	password	22401b61-af20-407e-ab83-c3556a9475bc	1791640139831	\N	{"value":"Ghgt+rXN/L4HfrPeJdo2gO2gziHuDrhfOe6sUbcmZ+A=","salt":"K4RuFDX6UUpw9QQ4j3ausw==","additionalParameters":{}}	{"hashIterations":5,"algorithm":"argon2","additionalParameters":{"hashLength":["32"],"memory":["7168"],"type":["id"],"version":["1.3"],"parallelism":["1"]}}	10
+bb77b8cf-f2a5-4d79-b65b-1b37b8b9c163	\N	password	6b1d5b66-35c2-44a6-8cf5-9d965d5e233e	1791640141844	\N	{"value":"yiqy8Tb7Amqg+0uDRr6FfrhqeoXuXYGXnr70+8ICS1Q=","salt":"tCe4UGlNJ6ZPjKZwW7WtMw==","additionalParameters":{}}	{"hashIterations":5,"algorithm":"argon2","additionalParameters":{"hashLength":["32"],"memory":["7168"],"type":["id"],"version":["1.3"],"parallelism":["1"]}}	10
+f1db2c28-7a91-4e58-9837-bc783fe6cfa8	\N	password	91973858-f25b-4a07-bfbd-a753f113f86e	1791640143865	\N	{"value":"bLN4f0y82KuEHHPCoUCc8E7lqW7Rv2bNtu0z3OVDu+g=","salt":"hdd3gAOeVWckPWnol1vFdQ==","additionalParameters":{}}	{"hashIterations":5,"algorithm":"argon2","additionalParameters":{"hashLength":["32"],"memory":["7168"],"type":["id"],"version":["1.3"],"parallelism":["1"]}}	10
+e1e74e7c-4fb4-48b3-a661-89d7a9237763	\N	password	dcb0f05b-b2fa-4608-bc68-3bbdbbfe0981	1791640145899	\N	{"value":"WHn6Z+HLpbHngkzvDUTFBCQxTdZxeuWsq4KylPD8J+M=","salt":"OLzn1cnWZMFJ0bXYsZjqDA==","additionalParameters":{}}	{"hashIterations":5,"algorithm":"argon2","additionalParameters":{"hashLength":["32"],"memory":["7168"],"type":["id"],"version":["1.3"],"parallelism":["1"]}}	10
+06e3826c-b971-422e-becf-ef3bd21f4444	\N	password	eefe3d58-0c31-4044-8245-7e299238b646	1791640147925	\N	{"value":"d7jMwIAV4nXAe84wF12hBLw7dPgd2ViAlKSK6oEueSw=","salt":"rTfDNRTAJv+HXyO1gspKfQ==","additionalParameters":{}}	{"hashIterations":5,"algorithm":"argon2","additionalParameters":{"hashLength":["32"],"memory":["7168"],"type":["id"],"version":["1.3"],"parallelism":["1"]}}	10
 \.
 
 
@@ -3824,7 +3829,7 @@ COPY public.federated_user (id, storage_provider_id, realm_id) FROM stdin;
 --
 
 COPY public.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
-1	0	<< Flyway Baseline >>	BASELINE	<< Flyway Baseline >>	\N	admin	2026-02-05 10:44:06.51421	0	t
+1	1	<< Flyway Baseline >>	BASELINE	<< Flyway Baseline >>	\N	admin	2026-02-05 10:44:06.51421	0	t
 \.
 
 
@@ -10708,6 +10713,11 @@ COPY public.user_ (created_date, id, last_active, last_modified_date, public_id,
 2026-03-16 10:14:57.359829+00	43	2026-03-16 10:14:57.32585+00	2026-03-16 10:14:57.359829+00	b78fbeee-da3d-40fe-8b61-fd1fe22ac071	\N	alaina.goyette@gmail.com	Schamberger	Janean	https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=75	alaina.goyette@gmail.com
 2026-03-17 08:18:45.857594+00	46	2026-03-17 08:18:45.842609+00	2026-03-17 08:18:45.857594+00	15dab576-86ed-43e2-946e-95440d1dda96	\N	bryon.reilly@yahoo.com	Goldner	Junita	https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=733	bryon.reilly@yahoo.com
 2025-12-12 14:24:09.937685+00	10	2025-12-16 14:15:58.163275+00	2026-02-05 06:46:40.39326+00	e8fe4a7f-619c-4d14-a25f-fe3de4b90549	Notice image street fight decision size parent focus. Kind degree list top somebody college.	cruzbarbara@example.com	Graham 	Bradley	https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=9863	jessica56518
+2026-10-10 13:46:04.72737+00	47	2026-10-10 13:46:04.600632+00	2026-10-10 13:46:04.72737+00	51d9fe7f-1960-474c-96a1-7eabcf18bef7	\N	demo01@gmail.com	Test	Demo01	https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=556	demo01
+2026-10-10 13:49:36.816918+00	50	2026-10-10 13:49:36.812982+00	2026-10-10 13:49:36.816918+00	ca14ceba-f104-465f-9876-11b279441b02	\N	demo02@gmail.com	Test	Demo02	https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=152	demo02
+2026-10-10 13:49:36.891792+00	51	2026-10-10 13:49:36.88788+00	2026-10-10 13:49:36.891792+00	560ef0d7-c009-4b8f-ae16-8e9b8f256513	\N	demo03@gmail.com	Test	Demo03	https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=451	demo03
+2026-10-10 13:49:36.966701+00	52	2026-10-10 13:49:36.962234+00	2026-10-10 13:49:36.966701+00	9e4e006e-2957-4cc7-a3c3-610445d1c83c	\N	demo04@gmail.com	Test	Demo04	https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=57	demo04
+2026-10-10 13:49:37.041159+00	53	2026-10-10 13:49:37.037239+00	2026-10-10 13:49:37.041159+00	2227de13-9a4f-439b-9234-26b95e8220ba	\N	demo05@gmail.com	Test	Demo05	https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=892	demo05
 \.
 
 
@@ -10783,6 +10793,26 @@ COPY public.user_authority (user_id, authority_name) FROM stdin;
 46	ROLE_uma_authorization
 46	ROLE_user
 46	ROLE_offline_access
+47	ROLE_default-roles-loci-realm
+47	ROLE_uma_authorization
+47	ROLE_user
+47	ROLE_offline_access
+50	ROLE_default-roles-loci-realm
+50	ROLE_uma_authorization
+50	ROLE_user
+50	ROLE_offline_access
+51	ROLE_default-roles-loci-realm
+51	ROLE_uma_authorization
+51	ROLE_user
+51	ROLE_offline_access
+52	ROLE_default-roles-loci-realm
+52	ROLE_uma_authorization
+52	ROLE_user
+52	ROLE_offline_access
+53	ROLE_default-roles-loci-realm
+53	ROLE_uma_authorization
+53	ROLE_user
+53	ROLE_offline_access
 \.
 
 
@@ -10831,6 +10861,11 @@ ce35d0b0-2a72-4a57-8fac-dcb8348f4c41	nestor.cartwright@yahoo.com	nestor.cartwrig
 cd2e474a-f099-4cce-ac9f-4d047fd00a01	testuser1@gmail.com	testuser1@gmail.com	f	t	\N	trung	kien	83b6664d-539e-4bed-a376-685d50e40b98	testuser1	1764321439014	\N	0
 4c8aa205-60a4-4caf-8b62-34777a9784dc	ulysses.barrows@gmail.com	ulysses.barrows@gmail.com	t	t	\N	Loreta	Beer	83b6664d-539e-4bed-a376-685d50e40b98	ulysses.barrows@gmail.com	1764321072228	\N	0
 4aed1f3e-884c-47f0-921a-4ca32c3d4a6b	\N	05f4642b-0d0e-466e-bee4-3fdc6b8fedc7	f	t	\N	\N	\N	0e1741a1-6eba-4a3a-abf2-239bc29f7fa9	admin	1773636321580	\N	0
+22401b61-af20-407e-ab83-c3556a9475bc	demo01@gmail.com	demo01@gmail.com	t	t	\N	Demo01	Test	83b6664d-539e-4bed-a376-685d50e40b98	demo01	1791639926949	\N	0
+6b1d5b66-35c2-44a6-8cf5-9d965d5e233e	demo02@gmail.com	demo02@gmail.com	t	t	\N	Demo02	Test	83b6664d-539e-4bed-a376-685d50e40b98	demo02	1791640140815	\N	0
+91973858-f25b-4a07-bfbd-a753f113f86e	demo03@gmail.com	demo03@gmail.com	t	t	\N	Demo03	Test	83b6664d-539e-4bed-a376-685d50e40b98	demo03	1791640142815	\N	0
+dcb0f05b-b2fa-4608-bc68-3bbdbbfe0981	demo04@gmail.com	demo04@gmail.com	t	t	\N	Demo04	Test	83b6664d-539e-4bed-a376-685d50e40b98	demo04	1791640144844	\N	0
+eefe3d58-0c31-4044-8245-7e299238b646	demo05@gmail.com	demo05@gmail.com	t	t	\N	Demo05	Test	83b6664d-539e-4bed-a376-685d50e40b98	demo05	1791640146885	\N	0
 \.
 
 
@@ -10912,6 +10947,11 @@ COPY public.user_role_mapping (role_id, user_id) FROM stdin;
 929392ee-0474-4ed0-a64e-9b0132025c91	4c8aa205-60a4-4caf-8b62-34777a9784dc
 69545a87-078a-4282-91ee-802c3c1c746a	4aed1f3e-884c-47f0-921a-4ca32c3d4a6b
 c6db3fe2-addb-424c-94bf-964ce7aea7a1	4aed1f3e-884c-47f0-921a-4ca32c3d4a6b
+929392ee-0474-4ed0-a64e-9b0132025c91	22401b61-af20-407e-ab83-c3556a9475bc
+929392ee-0474-4ed0-a64e-9b0132025c91	6b1d5b66-35c2-44a6-8cf5-9d965d5e233e
+929392ee-0474-4ed0-a64e-9b0132025c91	91973858-f25b-4a07-bfbd-a753f113f86e
+929392ee-0474-4ed0-a64e-9b0132025c91	dcb0f05b-b2fa-4608-bc68-3bbdbbfe0981
+929392ee-0474-4ed0-a64e-9b0132025c91	eefe3d58-0c31-4044-8245-7e299238b646
 \.
 
 
@@ -10963,6 +11003,11 @@ t	2026-02-05 10:42:02.988324+00	2026-02-05 10:42:02.988326+00	40	NOBODY	NOBODY
 t	2026-02-05 06:33:52.000417+00	2026-02-05 06:33:52.000417+00	42	EVERYONE	EVERYONE
 t	2026-03-16 10:14:57.424451+00	2026-03-16 10:14:57.424451+00	43	EVERYONE	EVERYONE
 t	2026-03-17 08:18:45.882036+00	2026-03-17 08:18:45.882036+00	46	EVERYONE	EVERYONE
+t	2026-10-10 13:46:04.771398+00	2026-10-10 13:46:04.771398+00	47	EVERYONE	EVERYONE
+t	2026-10-10 13:49:36.821297+00	2026-10-10 13:49:36.821297+00	50	EVERYONE	EVERYONE
+t	2026-10-10 13:49:36.895469+00	2026-10-10 13:49:36.895469+00	51	EVERYONE	EVERYONE
+t	2026-10-10 13:49:36.970634+00	2026-10-10 13:49:36.970634+00	52	EVERYONE	EVERYONE
+t	2026-10-10 13:49:37.045416+00	2026-10-10 13:49:37.045416+00	53	EVERYONE	EVERYONE
 \.
 
 
@@ -11041,7 +11086,7 @@ SELECT pg_catalog.setval('public.notification_sequence', 1, false);
 -- Name: user_sequence; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.user_sequence', 46, true);
+SELECT pg_catalog.setval('public.user_sequence', 53, true);
 
 
 --
@@ -13356,5 +13401,5 @@ ALTER TABLE ONLY public.contact_request
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 5dieaXYuUgrAplz85rxto7DV2cv0Mbl7mJZXfschbB7CBkR3Nd8F4BU6VeOi0gM
+\unrestrict 8RmvJbIps5Jn2Zafvy0O6X9LszOVdgAWgeWktesmDP3qUnMeapH06q7OCc3E5b9
 
