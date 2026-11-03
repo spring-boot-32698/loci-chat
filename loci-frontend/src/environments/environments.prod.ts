@@ -10,8 +10,8 @@ export const environment: IEnv = {
   apiUrl:         w.apiUrl         || '//your-prod-domain/api/v1',
 
   keycloak: {
-    issuer:   w.keycloakIssuer    || 'https://your-prod-keycloak',
-    realm:    w.keycloakRealm     || 'loci-realm',
-    clientId: w.keycloakClientId  || 'angular',
+    issuer:   w.keycloak?.issuer   || 'https://your-prod-keycloak',
+    realm:    w.keycloak?.realm    || 'loci-realm',
+    clientId: w.keycloak?.clientId || 'angular',
   },
 };
