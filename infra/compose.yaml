@@ -1,3 +1,6 @@
+# Shared project name so this file and the root compose.yaml (full stack) use the same volumes
+name: loci
+
 services:
   loci-db:
     container_name: loci-db
@@ -8,16 +11,15 @@ services:
       PGDATA: /var/lib/postgresql/data
       POSTGRES_DB: locidb
     volumes:
-      - loci-db:/data/postgres
-      ## Init script sql
-      # - ./backups:/backups
-      # - ./backups/backup.sql:/docker-entrypoint-initdb.d/init.sql
-      ## Entry point to access via script
-      # - ./scripts/postgres-entrypoint.sh:/postgres-entrypoint.sh
-      # - ./scripts/postgres-entrypoint.sh:/docker-entrypoint-initdb.d/initdb.sh
-
-    # entrypoint: ["postgres-entrypoint.sh"]
-
+      - loci-db:/var/lib/postgresql/data
+      # Seed (schema + Keycloak realm + demo data), applied only when the volume is empty
+      - ./backups/backup.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      # TCP check: only passes after the init script has finished
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U admin -d locidb"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
     restart: "no"
     ports:
       - 5432:5432
@@ -53,7 +55,8 @@ services:
     networks:
       - loci-net
     depends_on:
-      - loci-db
+      loci-db:
+        condition: service_healthy
     volumes:
       # - ./apps/keycloak/import:/opt/keycloak/data/import
       # - loci-keycloak:/opt/keycloak/data
@@ -81,10 +84,13 @@ services:
       "
 
     environment:
-      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins # Use to enable stomp plugin
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
-      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
 
     networks:
       - loci-net
@@ -202,8 +208,6 @@ networks:
     driver: bridge
 volumes:
   loci-db:
-    driver: local
-  loci-auth:
     driver: local
   loci-minio:
     driver: local

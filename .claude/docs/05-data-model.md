@@ -145,5 +145,5 @@ erDiagram
   (`message.status`, `read_at`) for the classic "seen" tick, and per-participant
   (`conversation_participant.last_read_message_id`) as a cursor for unread-count
   queries (`ConversationUnreadMessageCount`) without scanning every message.
-- **`data.sql`** (alongside `V1__baseline.sql`) seeds baseline reference data
-  (e.g. `authority` rows) on startup in dev-oriented profiles.
+- Local-dev seed data (users, conversations, Keycloak realm) is not a migration;
+  it lives in `infra/backups/backup.sql`.

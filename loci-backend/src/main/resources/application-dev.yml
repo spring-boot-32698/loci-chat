@@ -49,7 +49,7 @@ spring:
       #     schema-generation:
       #       scripts:
       #         action: create
-      #         create-target: src/main/resources/schema.sql
+      #         create-target: target/hibernate/schema.sql # relative to working dir: run from loci-backend/
 
       # NOTE: disable sql staging script
       # jakarta:
@@ -58,7 +58,7 @@ spring:
       #       create-source: metadata
       #       scripts:
       #         action: update
-      #         create-target: src/main/resources/update.sql
+      #         create-target: target/hibernate/update.sql # relative to working dir: run from loci-backend/
 
   # Disable
   devtools:

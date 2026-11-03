@@ -3,3 +3,5 @@ postgres-data/**
 *.log
 .idea/
 .idea
+keycloak-data/export/
+backups/*.old

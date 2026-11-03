@@ -1,0 +1,81 @@
+# Full stack in Docker: infrastructure from infra/compose.yaml + backend + frontend built from source.
+#   docker compose up -d --build      -> app at http://localhost:4200
+# Infrastructure only (run backend/frontend on the host): cd infra && docker compose up -d
+name: loci
+
+include:
+  - infra/compose.yaml
+
+services:
+  loci-server:
+    container_name: loci-server
+    build: ./loci-backend
+    ports:
+      - 8080:8080
+    depends_on:
+      loci-db:
+        condition: service_healthy
+      loci-rabbitmq:
+        condition: service_healthy
+      loci-auth:
+        condition: service_started
+      loci-minio:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: stage
+      SPRING_DATASOURCE_URL: jdbc:postgresql://loci-db:5432/locidb
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_FLYWAY_ENABLED: "true"
+      SPRING_FLYWAY_URL: jdbc:postgresql://loci-db:5432/locidb
+      SPRING_FLYWAY_USER: admin
+      SPRING_FLYWAY_PASSWORD: admin
+      SPRING_RABBITMQ_HOST: loci-rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_VIRTUAL_HOST: /
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: admin
+      SPRING_RABBITMQ_STOMP_HOST: loci-rabbitmq
+      SPRING_RABBITMQ_STOMP_PORT: 61613
+      STOMP_RELAY_HOST: loci-rabbitmq
+      STOMP_RELAY_PORT: 61613
+      STOMP_RELAY_CLIENT_LOGIN: admin
+      STOMP_RELAY_CLIENT_PASSCODE: admin
+      STOMP_RELAY_SYSTEM_LOGIN: admin
+      STOMP_RELAY_SYSTEM_PASSCODE: admin
+      APPLICATION_CLIENT_BASE_URL: http://localhost:4200
+      APPLICATION_CORS_ALLOWED_ORIGINS: http://localhost:4200
+      KEYCLOAK_REALM: loci-realm
+      # Issuer as the browser sees it (must match the token's "iss"); JWKs fetched over the Docker network
+      KEYCLOAK_ISSUER_URI_HOST: http://localhost:9090
+      KEYCLOAK_JWK_SET_URI_HOST: http://loci-auth:8080
+      KEYCLOAK_MIGRATION_PASSWORD: exampleloci123
+      KEYCLOAK_CREDENTIALS_USERNAME: admin
+      KEYCLOAK_CREDENTIALS_PASSWORD: admin
+      UPLOAD_MINIO_URL: http://loci-minio:9000
+      UPLOAD_MINIO_ACCESS_KEY: minioadmin
+      UPLOAD_MINIO_SECRET_KEY: minioadmin
+      UPLOAD_MINIO_BUCKET: loci-bucket-01
+      UPLOAD_MINIO_URL_PREFIX: http://localhost:9000
+      UPLOAD_MINIO_REGION: us-east-1
+    networks:
+      - loci-net
+    restart: "no"
+
+  loci-web:
+    container_name: loci-web
+    build: ./loci-frontend
+    ports:
+      - 4200:80
+    environment:
+      API_URL: //localhost:8080/api/v1
+      SOCKET_ENDPOINT: ws://localhost:8080/api/v1/ws
+      KEYCLOAK_ISSUER: http://localhost:9090
+      KEYCLOAK_REALM: loci-realm
+      KEYCLOAK_CLIENT_ID: angular
+    depends_on:
+      - loci-server
+      - loci-minio
+    networks:
+      - loci-net
+    restart: "no"

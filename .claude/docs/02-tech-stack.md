@@ -4,7 +4,7 @@
 
 | Concern | Technology | Notes |
 |---|---|---|
-| Language / runtime | Java, **Spring Boot 3.5.3** | Build via Maven (`pom.xml`); a `build.gradle` also exists but Maven is the primary/documented path (see root `README.md`) |
+| Language / runtime | Java, **Spring Boot 3.5.3** | Build via Maven (`pom.xml`, `mvnw`) |
 | Web | `spring-boot-starter-web` | REST controllers ("Resources") |
 | Real-time | `spring-boot-starter-websocket` + `spring-security-messaging` + **STOMP** | `/ws/*` endpoints; `stomp-websocket`, `sockjs-client` on the wire format |
 | Message broker (STOMP relay) | **RabbitMQ** (`spring-boot-starter-amqp`) or in-memory broker | Switchable via `stomp.relay.type` = `rabbitmq` \| `inmemory` (`RabbitMQWebSocketBrokerAutoConfiguration` / `InMemoryWebSocketBrokerAutoConfiguration`) |
@@ -14,7 +14,7 @@
 | Object storage | **MinIO** (S3-compatible, `minio` SDK) + AWS `s3` SDK v2, with a `LocalObjectStorage` fallback | Media attachments (`common/store`) |
 | Mapping / boilerplate | **MapStruct**, **ModelMapper**, **Lombok**, **Jilt** (builder generator) | Domain ⇄ Entity ⇄ REST DTO mapping across hexagonal layers |
 | API docs | **springdoc-openapi** (`/swagger-ui`) | Auto-generated OpenAPI from REST controllers |
-| Observability | **Micrometer + Prometheus** registry, **Spring Boot Actuator**, **Spring Boot Admin** client, **Logstash Logback Encoder** (JSON logs) | Scraped by the Prometheus/Grafana stack in `local-dev/` |
+| Observability | **Micrometer + Prometheus** registry, **Spring Boot Actuator**, **Spring Boot Admin** client, **Logstash Logback Encoder** (JSON logs) | Scraped by the Prometheus/Grafana stack in `infra/` |
 | Ops tooling | **Spring Shell** (`spring-shell-starter`) | CLI command for user migration (`UserMigrationShellCommand`) |
 | Testing | `spring-boot-starter-test`, `spring-security-test`, **H2** (in-memory DB for tests) | |
 | Code quality (build-time) | Checkstyle, PMD, SpotBugs Maven plugins; ProGuard plugin (present, likely for optional shrinking/obfuscation) | |
@@ -40,7 +40,7 @@ A directory tree mirroring the REST resource hierarchy (`auth/`, `conversations/
 independently of the backend implementation (springdoc-openapi generates the *actual*
 implementation-driven spec at runtime; `loci-api/` is the contract-first counterpart).
 
-## Infrastructure — `local-dev/`, `deploy/`
+## Infrastructure — `infra/`, root `compose.yaml`
 
 | Service | Image | Purpose |
 |---|---|---|
@@ -48,14 +48,14 @@ implementation-driven spec at runtime; `loci-api/` is the contract-first counter
 | **pgAdmin** | `dpage/pgadmin4` | DB admin UI (local dev only) |
 | **Keycloak** | `quay.io/keycloak/keycloak:26.0.0` | Identity provider / OAuth2 authorization server |
 | **RabbitMQ** (management) | `rabbitmq:3.12-management-alpine` | STOMP relay / message broker for WebSocket fan-out |
-| **MinIO** + `mc` client | `minio/minio`, `minio/mc` | S3-compatible object storage for media |
+| **MinIO** + `mc` client | `cgr.dev/chainguard/minio` (bundles `mc`) | S3-compatible object storage for media |
 | **Prometheus** | `prom/prometheus:v2.45.0` | Metrics scraping |
 | **Grafana** | `grafana/grafana:10.0.0` | Metrics dashboards |
-| **Nginx** | (`loci-frontend/nginx`, `deploy/`) | Reverse proxy / TLS termination, static frontend hosting in staging/production |
+| **Nginx** | (`loci-frontend/nginx`) | Serves the built frontend in its container and proxies `/loci-bucket-01/` media to MinIO |
 | **Jenkins** | (per root README) | CI/CD |
 
-Local dev is orchestrated with `local-dev/compose.yaml`; staging has its own
-`deploy/staging/compose.yaml` + `.env.staging`. See
+Infrastructure is defined in `infra/compose.yaml`; the root `compose.yaml`
+includes it and adds the backend and frontend built from source. See
 [Infrastructure & Local Dev](07-infrastructure.md) for ports and setup.
 
 ## Why this stack, in one line each

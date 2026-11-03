@@ -24,8 +24,8 @@ the repo and need to get oriented quickly.
 | `loci-backend/` | Spring Boot 3 backend (Java), Hexagonal/DDD, REST + WebSocket |
 | `loci-frontend/` | Angular 20 SPA (chat UI) |
 | `loci-api/` | OpenAPI/Stoplight-style REST contract definitions (one folder per resource) |
-| `local-dev/` | `compose.yaml` for local infra: Postgres, Keycloak, RabbitMQ, MinIO, Prometheus, Grafana |
-| `deploy/` | Staging/production Docker Compose + env files |
+| `infra/` | `compose.yaml` for local infra: Postgres, Keycloak, RabbitMQ, MinIO, Prometheus, Grafana |
+| `compose.yaml` | Full stack in Docker: includes `infra/compose.yaml` + builds backend and frontend |
 | `assets/` | Screenshots/GIFs used in the top-level `README.md` (already-existing architecture diagrams) |
 
 The project's own top-level [`README.md`](../../README.md) has quick-start run instructions

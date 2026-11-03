@@ -8,10 +8,23 @@ Real-time messaging app built with Spring Boot, Angular, and Hexagonal Architect
 
 ## Run it locally
 
+### Option 1 — everything in Docker
 
 ```bash
 git clone https://github.com/trung-kieen/loci-chat.git
-cd loci-backend
+cd loci-chat
+docker compose up -d --build
+```
+
+The database is seeded from `infra/backups/backup.sql` on first start.
+Demo accounts: `demo01` … `demo05` (password = username).
+
+### Option 2 — infrastructure in Docker, backend/frontend on the host
+
+```bash
+cd infra
+docker compose up -d
+cd ../loci-backend
 cp .env.example .env
 
 # mvn flyway:baseline

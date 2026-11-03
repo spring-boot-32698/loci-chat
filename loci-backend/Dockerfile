@@ -6,7 +6,6 @@ COPY pom.xml .
 COPY src ./src
 COPY proguard.cfg ./proguard.cfg
 COPY pmd-rules.xml ./pmd-rules.xml
-COPY .env ./.env
 
 RUN mvn clean package -DskipTests
 
