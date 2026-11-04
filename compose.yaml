@@ -21,6 +21,8 @@ services:
         condition: service_started
       loci-minio:
         condition: service_started
+      loci-redis:
+        condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: stage
       SPRING_DATASOURCE_URL: jdbc:postgresql://loci-db:5432/locidb
@@ -58,6 +60,8 @@ services:
       UPLOAD_MINIO_BUCKET: loci-bucket-01
       UPLOAD_MINIO_URL_PREFIX: http://localhost:9000
       UPLOAD_MINIO_REGION: us-east-1
+      SPRING_DATA_REDIS_HOST: loci-redis
+      SPRING_DATA_REDIS_PORT: 6379
     networks:
       - loci-net
     restart: "no"
