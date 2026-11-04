@@ -1,0 +1,39 @@
+{{- if .Values.tls.generate }}
+{{- $host := include "loci.host" . }}
+{{- $existing := lookup "v1" "Secret" .Release.Namespace "loci-ca" }}
+{{- $ca := dict }}
+{{- if $existing }}
+{{- $ca = buildCustomCert (index $existing.data "tls.crt") (index $existing.data "tls.key") }}
+{{- else }}
+{{- $ca = genCA "Loci Local CA" 3650 }}
+{{- end }}
+{{- $ips := list }}
+{{- $dns := list }}
+{{- if regexMatch "^[0-9.]+$" $host }}{{ $ips = list $host }}{{ else }}{{ $dns = list $host }}{{ end }}
+{{- $cert := genSignedCert $host $ips $dns (int .Values.tls.serverCertDays) $ca }}
+# Local CA: kept on upgrade/uninstall so devices only trust it once
+apiVersion: v1
+kind: Secret
+metadata:
+  name: loci-ca
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/resource-policy: keep
+type: kubernetes.io/tls
+data:
+  tls.crt: {{ $ca.Cert | b64enc }}
+  tls.key: {{ $ca.Key | b64enc }}
+  ca.crt: {{ $ca.Cert | b64enc }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: loci-tls
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+type: kubernetes.io/tls
+data:
+  tls.crt: {{ $cert.Cert | b64enc }}
+  tls.key: {{ $cert.Key | b64enc }}
+{{- end }}

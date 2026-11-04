@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loci-rabbitmq
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "loci.selector" "loci-rabbitmq" | nindent 4 }}
+  ports:
+    - name: amqp
+      port: 5672
+    - name: stomp
+      port: 61613
+    - name: management
+      port: 15672
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: loci-rabbitmq
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+    {{- include "loci.selector" "loci-rabbitmq" | nindent 4 }}
+spec:
+  serviceName: loci-rabbitmq
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "loci.selector" "loci-rabbitmq" | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "loci.selector" "loci-rabbitmq" | nindent 8 }}
+    spec:
+      containers:
+        - name: rabbitmq
+          image: {{ .Values.rabbitmq.image }}
+          command: ["sh", "-c", "rabbitmq-plugins enable --offline rabbitmq_stomp rabbitmq_web_stomp && exec rabbitmq-server"]
+          ports:
+            - containerPort: 5672
+            - containerPort: 61613
+            - containerPort: 15672
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              valueFrom: { secretKeyRef: { name: loci-credentials, key: rabbitmq-user } }
+            - name: RABBITMQ_DEFAULT_PASS
+              valueFrom: { secretKeyRef: { name: loci-credentials, key: rabbitmq-password } }
+          readinessProbe:
+            exec:
+              command: ["rabbitmq-diagnostics", "-q", "ping"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 10
+          livenessProbe:
+            exec:
+              command: ["rabbitmq-diagnostics", "-q", "ping"]
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 10
+          resources:
+            {{- toYaml .Values.rabbitmq.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/rabbitmq
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: {{ .Values.rabbitmq.storage }}

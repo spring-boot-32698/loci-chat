@@ -26,6 +26,7 @@ the repo and need to get oriented quickly.
 | `loci-api/` | OpenAPI/Stoplight-style REST contract definitions (one folder per resource) |
 | `infra/` | `compose.yaml` for local infra: Postgres, Keycloak, RabbitMQ, MinIO, Prometheus, Grafana |
 | `compose.yaml` | Full stack in Docker: includes `infra/compose.yaml` + builds backend and frontend |
+| `loci-helm-chart/` | Helm chart (+ k3d scripts) for the app and its infrastructure on a local Kubernetes cluster |
 | `assets/` | Screenshots/GIFs used in the top-level `README.md` (already-existing architecture diagrams) |
 
 The project's own top-level [`README.md`](../../README.md) has quick-start run instructions

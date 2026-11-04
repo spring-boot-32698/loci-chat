@@ -1,0 +1,88 @@
+# Address users open in the browser: https://<host>. An IP (e.g. the machine's LAN IP) or a hostname.
+# Required: Keycloak issues tokens for it and the TLS certificate is generated for it.
+host: ""
+
+# Credentials for the bundled services (local cluster defaults — change for anything shared)
+auth:
+  postgresUser: admin
+  postgresPassword: admin
+  postgresDatabase: locidb
+  keycloakAdminUser: admin
+  keycloakAdminPassword: admin
+  rabbitmqUser: admin
+  rabbitmqPassword: admin
+  minioRootUser: minioadmin
+  minioRootPassword: minioadmin
+
+tls:
+  # Generate a local CA + server certificate for `host` (CA is kept across upgrades/uninstalls).
+  # Devices trust the CA once by downloading http://<host>/ca.crt
+  generate: true
+  # Use an existing kubernetes.io/tls secret instead (generate: false)
+  existingSecret: ""
+  serverCertDays: 825 # iOS rejects longer validity
+
+ingress:
+  className: traefik
+  # Make the generated cert Traefik's default certificate (needed when `host` is an IP: no SNI)
+  traefikDefaultTLSStore: true
+
+backend:
+  image:
+    repository: loci-server
+    tag: dev
+    pullPolicy: IfNotPresent
+  springProfile: stage
+  resources:
+    requests: { cpu: 250m, memory: 768Mi }
+    limits: { memory: 2Gi }
+
+frontend:
+  image:
+    repository: loci-web
+    tag: dev
+    pullPolicy: IfNotPresent
+  resources:
+    requests: { cpu: 50m, memory: 32Mi }
+    limits: { memory: 128Mi }
+
+postgres:
+  image: postgres:18.1
+  storage: 2Gi
+  # ConfigMap with init.sql.gz (schema + Keycloak realm + demo data), applied when the volume is empty.
+  # Created by scripts/seed.sh. Empty = no seed.
+  seedConfigMap: loci-db-seed
+  resources:
+    requests: { cpu: 100m, memory: 256Mi }
+    limits: { memory: 1Gi }
+
+keycloak:
+  image: quay.io/keycloak/keycloak:26.0.0
+  realm: loci-realm
+  clientId: angular
+  # ConfigMap with realm/users JSON for --import-realm (skipped when the realm already exists in the DB)
+  realmImportConfigMap: loci-keycloak-realm
+  resources:
+    requests: { cpu: 250m, memory: 512Mi }
+    limits: { memory: 1536Mi }
+
+rabbitmq:
+  image: rabbitmq:3.12-management-alpine
+  storage: 1Gi
+  resources:
+    requests: { cpu: 100m, memory: 256Mi }
+    limits: { memory: 1Gi }
+
+minio:
+  image: cgr.dev/chainguard/minio:latest # bundles mc; quay.io/minio images are no longer public
+  bucket: loci-bucket-01
+  storage: 5Gi
+  resources:
+    requests: { cpu: 50m, memory: 128Mi }
+    limits: { memory: 1Gi }
+
+redis:
+  image: redis:7.2-alpine
+  resources:
+    requests: { cpu: 25m, memory: 32Mi }
+    limits: { memory: 256Mi }

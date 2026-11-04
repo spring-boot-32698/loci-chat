@@ -1,0 +1,6 @@
+apiVersion: v2
+name: loci
+description: Loci chat — backend, frontend and their infrastructure (Postgres, Keycloak, RabbitMQ, MinIO, Redis)
+type: application
+version: 0.1.0
+appVersion: "1.0-SNAPSHOT"

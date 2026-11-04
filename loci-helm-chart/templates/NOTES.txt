@@ -1,0 +1,9 @@
+Loci is deploying at {{ include "loci.publicUrl" . }}
+
+Watch it come up:   kubectl -n {{ .Release.Namespace }} get pods -w
+{{- if .Values.tls.generate }}
+
+Each device must trust the local CA once:
+  1. Open http://{{ include "loci.host" . }}/ca.crt and install it as a trusted CA
+  2. Open {{ include "loci.publicUrl" . }}
+{{- end }}

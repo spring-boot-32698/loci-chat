@@ -13,6 +13,14 @@ The root `compose.yaml` `include`s `infra/compose.yaml` and adds `loci-server`
 `loci-frontend/`, served by nginx on host port `4200`). Both compose files use the
 project name `loci`, so they share the same volumes.
 
+**Local Kubernetes (k3d + Helm)** — `loci-helm-chart/` deploys the backend, frontend,
+Postgres, Keycloak, RabbitMQ, MinIO and Redis behind Traefik on one HTTPS origin
+`https://<host>` (`/api/` backend incl. WebSocket, `/realms/` `/resources/` `/admin/`
+Keycloak, `/loci-bucket-01/` MinIO, `/` frontend). The chart generates a local CA (secret
+`loci-ca`, kept across upgrades) and serves it at `http://<host>/ca.crt`; HTTPS is mandatory
+because keycloak-js needs `crypto.randomUUID` (secure contexts only). Seed data comes from
+ConfigMaps created by `scripts/seed.sh`. Details in `loci-helm-chart/README.md`.
+
 **Backend/frontend on the host:**
 
 ```bash

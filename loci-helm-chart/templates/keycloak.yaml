@@ -1,0 +1,149 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loci-auth
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "loci.selector" "loci-auth" | nindent 4 }}
+  ports:
+    - name: http
+      port: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loci-auth
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+    {{- include "loci.selector" "loci-auth" | nindent 4 }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "loci.selector" "loci-auth" | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "loci.selector" "loci-auth" | nindent 8 }}
+    spec:
+      initContainers:
+        {{- include "loci.waitForDb" . | nindent 8 }}
+      containers:
+        - name: keycloak
+          image: {{ .Values.keycloak.image }}
+          args: ["start-dev", "--import-realm"]
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: management
+              containerPort: 9000
+          env:
+            - name: KEYCLOAK_ADMIN
+              valueFrom: { secretKeyRef: { name: loci-credentials, key: keycloak-admin-user } }
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              valueFrom: { secretKeyRef: { name: loci-credentials, key: keycloak-admin-password } }
+            - name: KC_DB
+              value: postgres
+            - name: KC_DB_URL_HOST
+              value: loci-db
+            - name: KC_DB_URL_DATABASE
+              value: {{ .Values.auth.postgresDatabase | quote }}
+            - name: KC_DB_USERNAME
+              valueFrom: { secretKeyRef: { name: loci-credentials, key: postgres-user } }
+            - name: KC_DB_PASSWORD
+              valueFrom: { secretKeyRef: { name: loci-credentials, key: postgres-password } }
+            # Tokens are issued for the public URL; in-cluster callers (backend JWKs) use loci-auth:8080
+            - name: KC_HOSTNAME
+              value: {{ include "loci.publicUrl" . | quote }}
+            - name: KC_HOSTNAME_BACKCHANNEL_DYNAMIC
+              value: "true"
+            - name: KC_PROXY_HEADERS
+              value: xforwarded
+            - name: KC_HTTP_ENABLED
+              value: "true"
+            - name: KC_HEALTH_ENABLED
+              value: "true"
+          startupProbe:
+            httpGet:
+              path: /health/started
+              port: management
+            periodSeconds: 5
+            failureThreshold: 60
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: management
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: management
+            periodSeconds: 30
+          resources:
+            {{- toYaml .Values.keycloak.resources | nindent 12 }}
+          {{- if .Values.keycloak.realmImportConfigMap }}
+          volumeMounts:
+            - name: realm-import
+              mountPath: /opt/keycloak/data/import
+              readOnly: true
+          {{- end }}
+      {{- if .Values.keycloak.realmImportConfigMap }}
+      volumes:
+        - name: realm-import
+          configMap:
+            name: {{ .Values.keycloak.realmImportConfigMap }}
+            optional: true
+      {{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loci-keycloak-client-config
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+data:
+  configure-keycloak-client.sh: |
+    {{- .Files.Get "files/configure-keycloak-client.sh" | nindent 4 }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: loci-keycloak-client-config
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation
+    # Re-run when the public URL changes
+    checksum/public-url: {{ include "loci.publicUrl" . | sha256sum }}
+spec:
+  backoffLimit: 10
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: kcadm
+          image: {{ .Values.keycloak.image }}
+          command: ["/bin/bash", "/scripts/configure-keycloak-client.sh"]
+          env:
+            - name: KEYCLOAK_ADMIN
+              valueFrom: { secretKeyRef: { name: loci-credentials, key: keycloak-admin-user } }
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              valueFrom: { secretKeyRef: { name: loci-credentials, key: keycloak-admin-password } }
+            - name: REALM
+              value: {{ .Values.keycloak.realm | quote }}
+            - name: CLIENT_ID
+              value: {{ .Values.keycloak.clientId | quote }}
+            - name: PUBLIC_URL
+              value: {{ include "loci.publicUrl" . | quote }}
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      volumes:
+        - name: scripts
+          configMap:
+            name: loci-keycloak-client-config

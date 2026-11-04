@@ -38,6 +38,15 @@ npm install
 npm run start 
 ```
 
+### Option 3 — local Kubernetes (k3d + Helm), reachable from other devices on your network
+
+```bash
+./loci-helm-chart/scripts/deploy.sh 192.168.1.5   # this machine's LAN IP
+```
+
+Then open `https://192.168.1.5` (each device trusts the local CA once from
+`http://192.168.1.5/ca.crt`). See [`loci-helm-chart/README.md`](loci-helm-chart/README.md).
+
 | Service        | URL                    |
 |----------------|------------------------|
 | App            | http://localhost:4200  |

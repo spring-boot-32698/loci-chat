@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loci-db
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "loci.selector" "loci-db" | nindent 4 }}
+  ports:
+    - name: postgres
+      port: 5432
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: loci-db
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+    {{- include "loci.selector" "loci-db" | nindent 4 }}
+spec:
+  serviceName: loci-db
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "loci.selector" "loci-db" | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "loci.selector" "loci-db" | nindent 8 }}
+    spec:
+      containers:
+        - name: postgres
+          image: {{ .Values.postgres.image }}
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              valueFrom: { secretKeyRef: { name: loci-credentials, key: postgres-user } }
+            - name: POSTGRES_PASSWORD
+              valueFrom: { secretKeyRef: { name: loci-credentials, key: postgres-password } }
+            - name: POSTGRES_DB
+              value: {{ .Values.auth.postgresDatabase | quote }}
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          readinessProbe:
+            # TCP check: only passes after the seed script has finished
+            exec:
+              command: ["sh", "-c", "pg_isready -h 127.0.0.1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\""]
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "pg_isready -U \"$POSTGRES_USER\""]
+            initialDelaySeconds: 60
+            periodSeconds: 20
+          resources:
+            {{- toYaml .Values.postgres.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+            {{- if .Values.postgres.seedConfigMap }}
+            - name: seed
+              mountPath: /docker-entrypoint-initdb.d
+              readOnly: true
+            {{- end }}
+      {{- if .Values.postgres.seedConfigMap }}
+      volumes:
+        - name: seed
+          configMap:
+            name: {{ .Values.postgres.seedConfigMap }}
+      {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: {{ .Values.postgres.storage }}

@@ -1,0 +1,97 @@
+# One HTTPS origin: https://<host>
+#   /api/                        -> backend (REST + WebSocket)
+#   /realms/ /resources/ /admin/ -> Keycloak
+#   /loci-bucket-01/             -> MinIO (media: anonymous read by path, no listing)
+#   /                            -> frontend
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: loci
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  tls:
+    - secretName: {{ include "loci.tlsSecret" . }}
+  rules:
+    - http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend: { service: { name: loci-server, port: { number: 8080 } } }
+          {{- range list "/realms" "/resources" "/admin" }}
+          - path: {{ . }}
+            pathType: Prefix
+            backend: { service: { name: loci-auth, port: { number: 8080 } } }
+          {{- end }}
+          - path: /{{ .Values.minio.bucket }}
+            pathType: Prefix
+            backend: { service: { name: loci-minio, port: { number: 9000 } } }
+          - path: /
+            pathType: Prefix
+            backend: { service: { name: loci-web, port: { number: 80 } } }
+---
+# Plain HTTP: serve the CA certificate, redirect everything else to HTTPS
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: loci-redirect-https
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: loci-http-redirect
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-loci-redirect-https@kubernetescrd
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend: { service: { name: loci-web, port: { number: 80 } } }
+{{- if .Values.tls.generate }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: loci-http-ca
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  rules:
+    - http:
+        paths:
+          - path: /ca.crt
+            pathType: Exact
+            backend: { service: { name: loci-web, port: { number: 80 } } }
+{{- end }}
+{{- if .Values.ingress.traefikDefaultTLSStore }}
+---
+# Clients connecting by IP send no SNI, so Traefik must serve this certificate by default
+apiVersion: traefik.io/v1alpha1
+kind: TLSStore
+metadata:
+  name: default
+  labels:
+    {{- include "loci.labels" . | nindent 4 }}
+spec:
+  defaultCertificate:
+    secretName: {{ include "loci.tlsSecret" . }}
+{{- end }}
